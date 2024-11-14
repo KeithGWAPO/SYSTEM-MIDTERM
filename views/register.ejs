@@ -1,0 +1,83 @@
+<!-- register.ejs -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="register.css"> <!-- Link to external CSS file -->
+</head>
+<body>
+
+<div class="container">
+    <h2 class="mt-5 text-center">Admin Registration</h2>
+    
+    
+    <form action="/register-user" method="post">
+        <div class="form-group">
+            
+            <label for="firstName">Firstname:</label>
+            <input name="firstName_data" type="text" class="form-control" id="firstName" required>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Lastname:</label>
+            <input name="lastName_data" type="text" class="form-control" id="lastName" required>
+        </div>
+        <div class="form-group">
+            <label for="birthdate">Birthdate:</label>
+            <input name="birthdate_data" type="date" class="form-control" id="birthdate" required>
+        </div>
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <select class="form-control" name="gender_data" id="gender" required>
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="ContactNumber">Contact Number:</label>
+            <input type="tel" class="form-control" id="ContactNumber" name="contactNumber_data" pattern="\d{11}" required>
+            <small class="form-text text-muted">Enter an 11-digit contact number (e.g., 09123456789).</small>
+        </div>
+        <div class="form-group">
+            <label for="role">Role:</label>
+            <input name="role" type="text" class="form-control" id="role" value="admin" readonly>
+        </div>
+        <div class="form-group">
+            <label for="Username">Username:</label>
+            <input name="Username_data" type="text" class="form-control" id="Username" required>
+        </div>
+        <div class="form-group">
+            <label for="Password">Password:</label>
+            <input name="Password_data" type="password" class="form-control" id="Password" required>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password:</label>
+            <input name="ConfirmPassword_data" type="password" class="form-control" id="confirmPassword" required>
+        </div>
+
+        <% if (message) { %>
+            <div class="text-danger">
+                <%= message %>
+            </div>
+        <% } %>
+
+        <br>
+
+        <button type="submit" class="btn btn-primary btn-block">Register</button>
+    </form>
+    
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

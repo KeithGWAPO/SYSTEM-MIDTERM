@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment</title>
+
+    <!-- Linking Google Font Link For Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <link rel="stylesheet" href="/css/staff/appointment.css">
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="/image/logo.png" alt="logo">
+            <h3>Brgy. Clinic Appointment</h3>
+        </div>
+        <ul class="sidebar-links">
+            <h4><span>Main Menu</span><div class="menu-separator"></div></h4>
+            <li><a href="Staffdashboard"><span class="material-symbols-outlined">dashboard</span>Dashboard</a></li>
+            <li><a href="appointment"><span class="material-symbols-outlined">today</span>Appointments</a></li>
+            <li><a href="/staff/patients"><span class="material-symbols-outlined">groups</span>Patients Record</a></li>
+            <li><a href="/login"><span class="material-symbols-outlined">logout</span>Logout</a></li>
+        </ul>
+        <div class="user-account">
+            <div class="user-profile">
+                <img src="/image/taylor.png" alt="profile-img">
+                <div class="user-detail">
+                    <h3>Taylor Swift</h3>
+                    <span>Clinic Staff</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main-content p-4 w-100">
+        <div class="sticky-header">
+            <h2>Appointments</h2>
+        </div>
+
+        <br>
+
+        <!-- Button to open the Appointment Form Modal -->
+        <button id="addAppointmentBtn" class="btn btn-add">
+            <span class="material-symbols-outlined">add</span> Schedule New Appointment
+        </button>
+
+        <!-- Appointment Form Modal -->
+        <div id="appointmentModal" class="modal">
+            <div class="modal-content">
+                <span id="closeModal" class="close">&times;</span>
+                <h3>Schedule New Appointment</h3>
+
+                <br>
+
+                <form action="/staff/appointment" method="POST">
+                    <!-- Patient Dropdown -->
+                    <label for="Patient_ID">Patient:</label>
+                    <select name="Patient_ID" id="patient_id" required>
+                        <% patientList.forEach(function(patient) { %>
+                            <option value="<%= patient.id %>"><%= patient.name %></option>
+                        <% }); %>
+                    </select>
+                
+                    <!-- Staff (User) Dropdown -->
+                    <label for="User_ID">Clinic Staff:</label>
+                    <select name="User_ID" id="users_id" required>
+                        <% staffList.forEach(function(staff) { %>
+                            <option value="<%= staff.id %>"><%= staff.name %></option>
+                        <% }); %>
+                    </select>
+                
+                    <!-- Appointment Date and Time Fields -->
+                    <label for="Appointment_Date">Appointment Date:</label>
+                    <input type="date" name="Appointment_Date" required>
+                
+                    <label for="Appointment_Time">Appointment Time:</label>
+                    <input type="time" name="Appointment_Time" required>
+                
+                    <label for="Appointment_Purpose">Appointment Purpose:</label>
+                    <textarea name="Appointment_Purpose" required></textarea>
+                
+                    <label for="Appointment_Status">Appointment Status:</label>
+                    <select name="Appointment_Status" required>
+                        <option value="Pending">Pending</option>
+                        <option value="Confirmed">Confirmed</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                
+                    <button type="submit">Add Appointment</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Existing Appointments -->
+        <section class="appointments-list">
+            <h3>Existing Appointments</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>Staff Incharge</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Purpose</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+            </table>
+        </section>
+    </main>
+
+    <!-- Modal and Button JavaScript -->
+    <script>
+        document.getElementById("addAppointmentBtn").onclick = function() {
+            document.getElementById("appointmentModal").style.display = "block";
+        };
+        document.getElementById("closeModal").onclick = function() {
+            document.getElementById("appointmentModal").style.display = "none";
+        };
+        window.onclick = function(event) {
+            if (event.target == document.getElementById("appointmentModal")) {
+                document.getElementById("appointmentModal").style.display = "none";
+            }
+        };
+    </script>
+    
+</body>
+</html>
